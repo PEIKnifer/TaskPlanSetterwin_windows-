@@ -1,0 +1,23 @@
+---
+description: MSBuild/NuGet 打包与发布规范（可重复构建、依赖隔离、签名）
+globs: **/*.{csproj,fsproj,vbproj,props,targets,nuspec,sln}
+alwaysApply: false
+---
+
+# MSBuild/NuGet 打包与发布规范
+
+## 目标框架与兼容性
+- 插件目标框架需要与“宿主运行时”匹配；不确定时优先多目标（multi-target）而不是强行升级宿主。
+- 优先面向 `netstandard2.0`（最大兼容）或明确的 `net6.0/net8.0`（当宿主已升级）；选择必须在方案中说明依据。
+
+## 依赖治理（避免宿主依赖冲突）
+- 默认避免把大量依赖带入宿主 AppDomain/ALC：能不依赖就不依赖，能内部封装就不要暴露到 Public API。
+- 使用 `PrivateAssets` / `IncludeAssets` 控制传递性依赖；必要时考虑依赖隔离加载（取决于宿主能力）。
+
+## 打包产物质量
+- 打包前至少确保：`dotnet build` 成功；发布/打包建议额外跑 `dotnet test`（若有）。
+- 版本号来源要可追踪：建议通过 `Directory.Build.props`/CI 注入；避免手改多处导致漂移。
+- 需要调试体验时，确保符号（PDB）与 SourceLink 策略明确（按项目需要）。
+
+## 强签名与签名
+- 宿主要求强签名时才启用；启用时必须保证密钥管理合规（不要把私钥提交到仓库）。

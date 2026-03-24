@@ -1,0 +1,21 @@
+---
+description: 运行时差异/依赖冲突/互操作（PInvoke/COM/Native/托管宿主）注意事项
+globs: **/*.cs
+alwaysApply: false
+---
+
+# 运行时差异、依赖冲突与互操作注意事项
+
+## 运行时与部署模型（按项目需要显式考虑）
+- .NET Framework：依赖冲突多发于 `AppDomain` 级别；避免全局 `AssemblyResolve` 黑魔法。
+- .NET (Core/5+)：关注 `AssemblyLoadContext`、单文件发布、Trimming、NativeAOT 等差异（按实际启用与否）。
+- 当处于**插件/扩展**场景：额外关注宿主加载顺序、隔离策略、以及“同进程共享依赖”的冲突面。
+
+## 依赖冲突的工程化处理
+- 避免“把依赖直接暴露给调用方/宿主”：公共 API 不返回/接收第三方类型（见兼容性规则）。
+- 需要隔离时，优先“内部适配层 + 最小边界”，并给出失败时的可诊断日志。
+
+## P/Invoke/Native 互操作
+- 优先 `SafeHandle` 管理句柄；不要用裸 `IntPtr` 漫天飞。
+- 显式声明调用约定、字符集、结构体布局；跨平台时考虑 `LibraryImport`/`DllImport` 差异与库名解析。
+- 对所有 native 调用失败路径提供可诊断信息（错误码、参数、宿主/系统信息）。

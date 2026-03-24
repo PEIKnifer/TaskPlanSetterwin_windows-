@@ -1,0 +1,17 @@
+---
+description: 子代理路由与调用约定（父代理参考）
+alwaysApply: true
+---
+
+# 子代理路由（委托前必读）
+
+父 Agent 在决定是否委托子代理时，按任务类型选择；未命中时优先使用 `top-generalist` 端到端交付。
+
+- **需求模糊/需要拆解** → `requirement-parser`（执行 `requirement-parse-flow`，澄清≤2）
+- **报错/异常/bug** → `bugfix`（执行 `bugfix-sop`，根因优先，禁止吞异常式兜底）
+- **新增功能/模块** → `feature`（执行 `feature-add-sop`，先搜后建）
+- **公共 API/兼容性/破坏性变更** → `api-compat-guardian`（执行 `public-api-compat-check`）
+- **打包/发布/NuGet/MSBuild/签名** → `packaging-release`（执行 `packaging-release-sop`）
+- **提交前检查/批量修改守门** → `commit-guard`（执行 `coding-commit-rules`）
+- **任务开始前/大改前核对规则** → `rules-checker`（执行 `project-rules-check`）
+- **综合/跨域** → `top-generalist`（必要时二次委托上述代理）
