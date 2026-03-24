@@ -4,8 +4,10 @@
 
 大概看截图，需要的自行下载，直接用，或者自己改改。
 
+主界面_满足一般使用需求
 ![主界面_满足一般使用需求](docs/screenshot/main.png)
 
+高级界面_扩展原计划任务功能项，不会选不动就行，默认都配置了默认选项
 ![高级界面_扩展原计划任务功能项，不会选不动就行，默认都配置了默认选项](docs/screenshot/high.png)
 
 ## 功能特性
@@ -75,4 +77,16 @@ TaskPlanSetter/
 
 ## 许可证
 
-当前仓库未声明开源许可证。如需开源，请补充 `LICENSE` 文件。
+本项目采用 [MIT License](LICENSE) 开源协议。
+
+Copyright (c) 2026 PEIKnifer
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
