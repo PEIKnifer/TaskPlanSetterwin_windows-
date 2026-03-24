@@ -1,6 +1,12 @@
-# TaskPlanSetter
+# TaskPlanSetter Windows 启动项目便捷增删改工具
 
-一个基于 WinForms（.NET Framework 4.8）的 Windows 任务计划可视化编辑工具，聚焦“快速查看、快速改、快速验证”。
+旨在为Windows启动项目提供一个便捷的管理工具，windows自带的任务计划太复杂了，好多项目也不知道怎么选，我有时候只想单纯开机启动一个exe，还要设置一堆。
+
+大概看截图，需要的自行下载，直接用，或者自己改改。
+
+![主界面_满足一般使用需求](docs/screenshot/main.png)
+
+![高级界面_扩展原计划任务功能项，不会选不动就行，默认都配置了默认选项](docs/screenshot/high.png)
 
 ## 功能特性
 
